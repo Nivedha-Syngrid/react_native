@@ -30,7 +30,7 @@ import DrawerContent from "./DrawerContent";
         <Stack.Screen name="Home" component={HomeScreen} options={{
           headerLeft:() => {
             return(
-              <Icon 
+              <Icon
               name= "menu" 
               size={30} 
               color="#fff"
@@ -38,16 +38,30 @@ import DrawerContent from "./DrawerContent";
             );
           }
         }} />
-        <Stack.Screen name="Profile" component={ProfileScreen}/>
-        <Stack.Screen name="User" component={UserScreen} options={{
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="User" component={UserScreen} 
+        options={{
           headerShown: true,
-          /* headerBackVisible: false,
-          headerLeft:() =>{
-            return(
-              <Text>Hi</Text>
-            )} */
-          }}/>
+          headerStyle: {
+            backgroundColor: "#0163d2",
+          }}} />
     </Stack.Navigator>
+  );
+}
+
+const UserStackNav = () => {
+  const UserStack=createNativeStackNavigator();
+  return (
+    <UserStack.Navigator screenOptions={{
+      statusBarColor : "#0163d2",
+      headerStyle: {
+        backgroundColor: "#0163d2"
+      },
+      headerTintColor : "#fff",
+      headerTitleAlign: "center",
+    }}>
+      <UserStack.Screen name="User" component={UserScreen} />
+    </UserStack.Navigator>
   );
 }
 
@@ -62,8 +76,8 @@ const TabNav = () => {
       iconComponent: Iconi,
     },
     {
-      name: "Profile",
-      component: ProfileScreen,
+      name: "User",
+      component: UserStackNav,
       focusedIcon: 'user',
       unfocusedIcon: 'user-o',
       iconComponent: FontAwesome,
@@ -97,16 +111,12 @@ const TabNav = () => {
           <TabNav.Screen
           key={routeConfig.name}
           name={routeConfig.name}
-          component={routeConfig.component}
-          options={{
-            headerShown: routeConfig.name === "Profile" ? true : false, // ✅ Show header for Profile only
-          }}        
+          component={routeConfig.component}     
           />
         ))}
       </TabNav.Navigator>
   );
 }
-
 const DrawerNav = () => {
   const Drawer=createDrawerNavigator();
   return (
