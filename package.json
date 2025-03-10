@@ -11,18 +11,26 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/slider": "^4.5.6",
+    "@react-native-picker/picker": "^2.11.0",
     "@react-navigation/bottom-tabs": "^7.2.1",
     "@react-navigation/drawer": "^7.1.2",
     "@react-navigation/native": "^7.0.15",
     "@react-navigation/native-stack": "^7.2.1",
+    "formik": "^2.4.6",
     "react": "19.0.0",
     "react-native": "0.78.0",
     "react-native-gesture-handler": "^2.24.0",
+    "react-native-modal": "^13.0.1",
     "react-native-paper": "^5.13.1",
+    "react-native-radio-buttons": "^1.0.0",
+    "react-native-radio-buttons-group": "^3.1.0",
     "react-native-reanimated": "^3.17.1",
     "react-native-safe-area-context": "^5.2.0",
     "react-native-screens": "^4.9.1",
-    "react-native-vector-icons": "^10.2.0"
+    "react-native-simple-radio-button": "^2.7.4",
+    "react-native-vector-icons": "^10.2.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
