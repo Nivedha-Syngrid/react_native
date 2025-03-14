@@ -11,7 +11,7 @@ const DrawerList = [
     {icon: 'home-outline', label: 'Home', navigateTo:'Home'},
     {icon: 'account-multiple', label: 'Profile', navigateTo:'Profile'},
     {icon: 'account-group', label: 'User', navigateTo:'User'},
-    {icon: 'bookshelf', label: 'Library', navigateTo:'Profile'},
+    {icon: 'bookshelf', label: 'Flex', navigateTo:'Flex'},
 ];
 
 const DrawerLayout=({icon, label, navigateTo}) => {

@@ -13,6 +13,7 @@ import HomeScreen from "./Screens/HomeScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import UserScreen from "./Screens/UserScreen";
 import DrawerContent from "./DrawerContent";
+import FlexScreen from "./Screens/FlexScreen";
 
  const StackNav=() => {
   const Stack= createNativeStackNavigator();
@@ -45,6 +46,7 @@ import DrawerContent from "./DrawerContent";
           headerStyle: {
             backgroundColor: "#0163d2",
           }}} />
+          <Stack.Screen name="Flex" component={FlexScreen} />
     </Stack.Navigator>
   );
 }

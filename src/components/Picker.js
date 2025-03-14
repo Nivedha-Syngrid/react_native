@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, TextInput, Button, Modal } from 'react-native';
+import { ScrollView,Text, StyleSheet, View, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 import OutputScreen from "../../Screens/OutputScreen";
 import RadioForm from 'react-native-simple-radio-button';
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+
 
 const PickerDemo = () => {
     const [email, setEmail] = useState('');
@@ -21,10 +23,27 @@ const PickerDemo = () => {
       { label: 'Samsung', value: 'samsung' },
       { label: 'Nokio', value: 'nokio'}
     ];
+    const chk_options = [
+      { label: "Red", value: "red" },
+      { label: "Blue", value: "blue" },
+      { label: "Green", value: "green" }
+    ];
+  
+    const [selectedOptions, setSelectedOptions] = useState([]);
+  
+    const toggleCheckbox = (value) => {
+      if (selectedOptions.includes(value)) {
+        setSelectedOptions(selectedOptions.filter(item => item !== value));
+      } else {
+        setSelectedOptions([...selectedOptions, value]);
+      }
+    };
+    
     return (
         <View style={styles.container}>
-            <Text style={styles.formLabel}>Demo Form</Text>
+          <ScrollView>
             <View>
+            <Text style={styles.formLabel}>Demo Form</Text>
                 <TextInput placeholder="Email" style={styles.inputStyle} value={email} onChangeText={setEmail}/>
                 <TextInput secureTextEntry={true} placeholder="Password" style={styles.inputStyle} value={passwd} onChangeText={(text)=>setPasswd(text)}/>
                 <Picker
@@ -58,14 +77,30 @@ const PickerDemo = () => {
                 </Text>
               </View>
               <View>
-      <RadioForm style={styles.text}
-        radio_props={options}
-        initial={0} //initial value of this group
-        onPress={(value) => {
-          setChosenOption(value);
-        }} //if the user changes options, set the new value
-      />
-    </View>
+                <RadioForm style={styles.text} radio_props={options} initial={0} onPress={(value) => { 
+                  setChosenOption(value);
+                }}/>
+              </View>
+              <View>
+              <Text style={styles.textStyle}>
+                    Check the colors you want:
+                </Text>
+              {chk_options.map((chk_option) => (
+                <TouchableOpacity
+                  key={chk_option.value}
+                  style={styles.checkBox}
+                  onPress={() => toggleCheckbox(chk_option.value)}
+                >
+                  <MaterialIcons
+                    name={selectedOptions.includes(chk_option.value) ? "check-box" : "check-box-outline-blank"}
+                    size={24}
+                    color="#007AFF"
+                  />
+                  <Text style={styles.text}>{chk_option.label}</Text>
+                </TouchableOpacity>
+              ))}
+                <Text style={styles.selectedText}>Selected: {selectedOptions.join(", ")}</Text> 
+              </View>
               <View>
                   <Button style={styles.buttonStyle} title="View Data" onPress={toggleModal}/>
                   <Modal
@@ -75,14 +110,14 @@ const PickerDemo = () => {
                     onRequestClose={toggleModal}>
                     <View style={styles.modalContainer}>
                         <View style={styles.modalContent}>
-                            <OutputScreen email={email} passwd={passwd} currency={currency} slideval={slideValue} radiobtn={chosenOption}/>
+                            <OutputScreen email={email} passwd={passwd} currency={currency} slideval={slideValue} radiobtn={chosenOption} chkbtn={selectedOptions}/>
                             {/* <OutputScreen/> */}
                             <Button title="Hide modal" onPress={toggleModal} />
                         </View>
                     </View>
                 </Modal>
                 </View>   
-                
+          </ScrollView>      
         </View>
     );
 }
@@ -141,6 +176,16 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       borderRadius: 10,
       alignItems: 'center',
+  },
+  checkBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  selectedText: {
+    marginTop: 20,
+    fontSize: 16,
+    color: "black",
   }
   });
 export default PickerDemo;
